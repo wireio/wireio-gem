@@ -11,7 +11,6 @@ Gem::Specification.new do |spec|
   spec.description   = %q{Gem to consume WireIO rest api}
   spec.summary       = %q{WireIO rest api client}
   spec.homepage      = "https://github.com/wireio/wireio-gem"
-  spec.license       = "MIT"
   
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
