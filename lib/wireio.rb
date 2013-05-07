@@ -1,22 +1,25 @@
 require "wireio/version"
 require "restclient"
 require "json"
+require "signature"
 
 module WireIO
   class Client
     API_VERSION     = 'v1'
     
     def initialize(public_key, private_key)
-      @public_key, @private_key = public_key, private_key
+      @public_key, @private_key = public_key.downcase, private_key.downcase
       @base_uri     = 'https://app.getwire.io'
       @api_endpoint = "api/#{API_VERSION}/events"
-      @action       = "fire"
+      @action       = "fire.json"
     end
     
     def on(event_name, payload)
-      end_point = construct_endpoint_for(event_name)
-      payload.merge!(generate_auth_hash_for(end_point, payload))
-      RestClient.post(end_point, JSON.dump({:payload => payload}), 
+      RestClient.post(construct_endpoint_for(event_name), 
+        JSON.dump({
+          :payload => payload, 
+          :auth_hash =>  generate_auth_hash_for(@api_endpoint, payload)
+        }), 
         :content_type => :json) { |response, _request, _result|
           case response.code
           when 200
