@@ -19,7 +19,7 @@ RSpec.configure do |config|
     WebMock.reset!
     ## Simulates a valid request to fire an event.
     WebMock.stub_request(:post, valid_uri).
-      with(:body => {params.merge(auth_hash)}).
+      with(:body => params.merge(auth_hash)).
       to_return(:body => "200 FIRED\n", :status => 200)
   end
 end
