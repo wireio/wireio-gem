@@ -21,13 +21,13 @@ Or install it yourself as:
 
 Using the library is straight forward, first you need initialize the client with your application keys
 		
-		@public_key = "awesome_public_key";
-		@private_key = "awesome_private_key";
-		@wio = WireIO::Client.new(@public_key, @private_key);
+		@public_key = "awesome_public_key"
+		@private_key = "awesome_private_key"
+		@wio = WireIO::Client.new(@public_key, @private_key)
 
 Then to trigger an event
 		
-		@wio.on('jedi-boarding-ship', {:nick => 'luke'});
+		@wio.on('jedi-boarding-ship', {:nick => 'luke'})
 
 
 ## Contributing
